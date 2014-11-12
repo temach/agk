@@ -576,10 +576,16 @@ class Vector3(object):
     
     def get_projected_line(self, direction):
         """
-        Use this to find a projection of self on a plane.
+        Use this to find a projection of self on a plane. 
+        Formula taken from Wikipedia: a = ( (a.b)/(|b|^2) ) * b = ( (a.b)/(b.b) ) * b
+        I use the latter formula (with two dot products).
+        Actually if direction is supposed to be a unit vector we don't need to calculate 'factor' variable 
+        (it will be the same as dp since 
+            v1.dot(v1) = |v1|**2 = (unit vec dot itself) = (unit vec's lengh squared) = 1
+        )
 
         direction -- Vector3 of UNIT LENGTH on which to project.
-
+        
         """
         
         dp = self.dot(direction)
